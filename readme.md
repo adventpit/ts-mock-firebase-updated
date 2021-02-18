@@ -1,6 +1,8 @@
-# Ts-Mock-Firebase
+# Ts-Mock-Firebase-updated
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/mindhivefi/ts-mock-firebase.svg)](https://greenkeeper.io/)
+
+NOTE - This library is based on [ts-mock-firebase](https://github.com/mindhivefi/ts-mock-firebase) from [mindhivefi](https://github.com/mindhivefi). The only change done to the mentioned library is supposed to be dependency updates, to make this library run on newer versions of node js.
 
 Ts-Mock-Firebase is a mocking library to help testing Firebase projects. It is especially handy for developers using Typescript. All mocking classes implements the actual Firebase interfaces.
 
