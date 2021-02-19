@@ -1,16 +1,16 @@
-import { MockCollectionReference } from './MockCollectionReference';
 import { MockFirebaseFirestore } from '@firebase/app-types';
 import {
   DocumentChange,
   DocumentChangeType,
   DocumentData,
+  DocumentReference,
   FieldPath,
   SetOptions,
   Transaction,
   UpdateData,
-  DocumentReference,
 } from '@firebase/firestore-types';
 import { deepCopy } from '@firebase/util';
+import { MockCollectionReference } from './MockCollectionReference';
 
 import MockDocumentReference from './MockDocumentReference';
 import MockDocumentSnapshot from './MockDocumentSnapshot';

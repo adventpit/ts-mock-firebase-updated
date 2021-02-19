@@ -10,8 +10,8 @@ import {
 } from '@firebase/app-types';
 import { createSubscribe, deepExtend, ErrorFactory, } from '@firebase/util';
 
-import { MockFirebaseAppImpl } from './app';
 import { patchProperty } from '../utils';
+import { MockFirebaseAppImpl } from './app';
 
 export const DEFAULT_ENTRY_NAME = '[DEFAULT]';
 

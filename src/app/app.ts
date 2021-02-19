@@ -21,7 +21,7 @@ import {
   MockFirebaseFirestore,
   MockFirebaseNamespace,
 } from '@firebase/app-types';
-import { _FirebaseNamespace, FirebaseAppInternals, FirebaseService } from '@firebase/app-types/private';
+import { FirebaseAppInternals, FirebaseService, _FirebaseNamespace } from '@firebase/app-types/private';
 import { deepCopy, deepExtend } from '@firebase/util';
 import { DEFAULT_ENTRY_NAME } from '../app';
 import { MockFirebaseFirestoreImpl } from '../firestore';
@@ -105,7 +105,7 @@ export class MockFirebaseAppImpl implements MockFirebaseApp {
   }
 
   public delete(): Promise<void> {
-    return new Promise(resolve => {
+    return new Promise<void> (resolve => {
       this.checkDestroyed_();
       resolve();
     })

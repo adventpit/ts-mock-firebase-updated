@@ -1,10 +1,10 @@
 import {
   DocumentData,
+  DocumentReference,
   DocumentSnapshot,
   FieldPath,
   SnapshotMetadata,
   SnapshotOptions,
-  DocumentReference,
 } from '@firebase/firestore-types';
 
 import { getFieldValueFromData } from './utils';
