@@ -1,6 +1,6 @@
 {
-  "name": "ts-mock-firebase",
-  "version": "2.3.0",
+  "name": "ts-mock-firebase-updated",
+  "version": "3.0.0",
   "description": "Mock objects for Firebase",
   "main": "lib/index.js",
   "scripts": {
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mindhivefi/ts-mock-firebase.git"
+    "url": "https://github.com/adventpit/ts-mock-firebase-updated.git"
   },
   "release": {
     "verifyConditions": "condition-circle",
@@ -55,44 +55,44 @@
     "typescript",
     "javascript"
   ],
-  "author": "Ville Venäläinen <ville@mindhive.fi> (https://www.mindhive.fi)",
+  "author": "Pit Mueller <pit.muller@geshdo.com>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/mindhivefi/ts-mock-firebase/issues"
+    "url": "https://github.com/adventpit/ts-mock-firebase-updated/issues"
   },
-  "homepage": "https://github.com/mindhivefi/ts-mock-firebase#readme",
+  "homepage": "https://github.com/adventpit/ts-mock-firebase-updated#readme",
   "devDependencies": {
-    "@commitlint/cli": "8.3.5",
-    "@commitlint/config-conventional": "8.3.4",
+    "@commitlint/cli": "11.0.0",
+    "@commitlint/config-conventional": "11.0.0",
     "@semantic-release/changelog": "5.0.1",
     "@semantic-release/git": "9.0.0",
-    "@semantic-release/npm": "7.0.5",
-    "@types/antlr4": "4.7.0",
-    "@types/jest": "25.2.1",
-    "@types/uuid": "7.0.3",
-    "commitizen": "4.1.0",
+    "@semantic-release/npm": "7.0.10",
+    "@types/antlr4": "4.7.2",
+    "@types/jest": "26.0.20",
+    "@types/uuid": "8.3.0",
+    "commitizen": "4.2.3",
     "condition-circle": "2.0.2",
-    "git-cz": "3.0.1",
-    "husky": "4.2.5",
-    "jest": "25.5.4",
+    "git-cz": "4.7.6",
+    "husky": "5.0.9",
+    "jest": "26.6.3",
     "rimraf": "3.0.2",
-    "semantic-release": "17.0.7",
-    "ts-jest": "25.4.0",
+    "semantic-release": "17.3.9",
+    "ts-jest": "26.5.1",
     "tslint": "6.1.2",
     "tslint-config-prettier": "1.18.0",
     "tslint-sonarts": "1.9.0",
-    "typescript": "3.8.3"
+    "typescript": "4.1.5"
   },
   "dependencies": {
-    "@firebase/app-types": "0.6.0",
-    "@firebase/auth": "0.14.4",
-    "@firebase/firestore": "1.14.2",
-    "@firebase/firestore-types": "1.10.1",
-    "@firebase/messaging": "0.6.14",
-    "@firebase/util": "0.2.45",
-    "antlr4": "4.7.2",
+    "@firebase/app-types": "0.6.1",
+    "@firebase/auth": "0.16.3",
+    "@firebase/firestore": "2.1.6",
+    "@firebase/firestore-types": "2.1.0",
+    "@firebase/messaging": "0.7.3",
+    "@firebase/util": "0.3.4",
+    "antlr4": "4.9.1",
     "firebase-rules-parser": "2.0.1",
-    "uuid": "8.0.0"
+    "uuid": "8.3.2"
   },
   "config": {
     "commitizen": {

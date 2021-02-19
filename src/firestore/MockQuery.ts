@@ -1,25 +1,25 @@
 import {
   CollectionReference,
   DocumentChange,
+  DocumentData,
   FieldPath,
   FirebaseFirestore,
+  FirestoreDataConverter,
   FirestoreError,
   GetOptions,
   OrderByDirection,
   Query,
   QueryDocumentSnapshot,
   QuerySnapshot,
-  SnapshotListenOptions,
-  WhereFilterOp,
-  DocumentData, FirestoreDataConverter
+  SnapshotListenOptions, WhereFilterOp
 } from '@firebase/firestore-types';
 import { MockCollectionReference } from './MockCollectionReference';
-import MockDocumentReference from './MockDocumentReference';
+import MockDocumentReference, { FirebaseErrorFunction } from './MockDocumentReference';
 import MockQueryDocumentSnapshot from './MockQueryDocumentSnapshot';
 import MockQuerySnapshot from './MockQuerySnapshot';
 import { NotImplementedYet } from './utils/NotImplementedYet';
 
-import { ErrorFunction, MockSubscriptionFunction } from './MockDocumentReference';
+import { MockSubscriptionFunction } from './MockDocumentReference';
 import { findIndexForDocument, MockFirebaseValidationError } from './utils';
 import MockCallbackHandler from './utils/CallbackHandler';
 import { filterDocumentsByRules } from './utils/matching';
@@ -182,7 +182,7 @@ export default class MockQuery<T = DocumentData> implements Query<T> {
   }
 
   public limitToLast = (limit: number): Query<T> => {
-    throw new NotImplementedYet("MockQuery.limitToLast")
+    throw new NotImplementedYet("MockQuery.limitToLast");
   }
   /**
    * Creates and returns a new Query that starts at the provided document
@@ -340,15 +340,15 @@ export default class MockQuery<T = DocumentData> implements Query<T> {
    */
   public onSnapshot = ((
     optionsOrObserverOrOnNext: SnapshotListenOptions | MockQuerySnapshotObserver | MockQuerySnapshotCallback,
-    observerOrOnNextOrOnError?: MockQuerySnapshotObserver | MockQuerySnapshotCallback | ErrorFunction,
-    onErrorOrOnCompletion?: ErrorFunction | MockSubscriptionFunction
+    observerOrOnNextOrOnError?: MockQuerySnapshotObserver | MockQuerySnapshotCallback | FirebaseErrorFunction,
+    onErrorOrOnCompletion?: FirebaseErrorFunction | MockSubscriptionFunction
   ): MockSubscriptionFunction => {
     if (typeof optionsOrObserverOrOnNext === 'function') {
       this._snapshotCallbackHandler.add(optionsOrObserverOrOnNext);
       return () => this._snapshotCallbackHandler.remove(optionsOrObserverOrOnNext);
     }
     throw new NotImplementedYet('MockQuery.onSnapshot');
-  }) as any
+  }) as any;
 
   /**
    * Handle onSnapshot callbacks for document changes that have impact on this query.

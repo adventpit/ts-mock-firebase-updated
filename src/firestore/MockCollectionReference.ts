@@ -7,6 +7,7 @@ import {
   DocumentReference,
   DocumentSnapshot,
   FieldPath,
+  FirestoreDataConverter,
   GetOptions,
   OrderByDirection,
   Query,
@@ -14,13 +15,12 @@ import {
   QuerySnapshot,
   SnapshotListenOptions,
   WhereFilterOp,
-  FirestoreDataConverter,
 } from '@firebase/firestore-types';
 
 import { MockCollection, MockDocuments } from '.';
 import { Mocker } from '../app';
 import { deepCopy } from '../utils/deepCopy';
-import MockDocumentReference, { ErrorFunction, MockSubscriptionFunction } from './MockDocumentReference';
+import MockDocumentReference, { FirebaseErrorFunction, MockSubscriptionFunction } from './MockDocumentReference';
 import MockQuery, { MockQuerySnapshotCallback, MockQuerySnapshotObserver } from './MockQuery';
 import MockQueryDocumentSnapshot from './MockQueryDocumentSnapshot';
 import MockQuerySnapshot from './MockQuerySnapshot';
@@ -431,8 +431,8 @@ export class MockCollectionReference<T = DocumentData> implements CollectionRefe
    */
   public onSnapshot = (
     optionsOrObserverOrOnNext: SnapshotListenOptions | MockQuerySnapshotObserver | MockQuerySnapshotCallback,
-    observerOrOnNextOrOnError?: MockQuerySnapshotObserver | MockQuerySnapshotCallback | ErrorFunction,
-    onErrorOrOnCompletion?: ErrorFunction | MockSubscriptionFunction
+    observerOrOnNextOrOnError?: MockQuerySnapshotObserver | MockQuerySnapshotCallback | FirebaseErrorFunction,
+    onErrorOrOnCompletion?: FirebaseErrorFunction | MockSubscriptionFunction
   ): MockSubscriptionFunction => {
     if (typeof optionsOrObserverOrOnNext === 'function') {
       const callback = optionsOrObserverOrOnNext;
@@ -454,7 +454,7 @@ export class MockCollectionReference<T = DocumentData> implements CollectionRefe
     throw new Error('Not implemented yet');
   }
 
-  public fireBatchDocumentChange = (documentChanges: DocumentChange<T>[]) => {
+  public fireBatchDocumentChange = (documentChanges: DocumentChange<T>[]): void => {
     const docs = this.getQueryDocumentSnapshots();
     const querySnapshot = new MockQuerySnapshot(this, docs, documentChanges);
     this._snapshotCallbackHandler.fire(querySnapshot);
@@ -537,7 +537,7 @@ export class MockCollectionReference<T = DocumentData> implements CollectionRefe
     const result: QueryDocumentSnapshot[] = [];
     Object.keys(this._docRefs).forEach(key => {
       if (this._docRefs[key] && this._docRefs[key].data) {
-        result.push(new MockQueryDocumentSnapshot(this._docRefs[key]) as QueryDocumentSnapshot);
+        result.push(new MockQueryDocumentSnapshot(this._docRefs[key]) as unknown as QueryDocumentSnapshot);
       }
     });
     return result;

@@ -1,4 +1,3 @@
-import { MockCollectionReference } from './MockCollectionReference';
 import {
   DocumentChangeType,
   DocumentReference,
@@ -7,6 +6,7 @@ import {
   UpdateData,
   WriteBatch,
 } from '@firebase/firestore-types';
+import { MockCollectionReference } from './MockCollectionReference';
 
 import { MockFirebaseFirestore } from '@firebase/app-types';
 import { deepCopy } from '@firebase/util';
@@ -77,7 +77,7 @@ export class MockWriteBatch implements WriteBatch {
    * @return This `WriteBatch` instance. Used for chaining method calls.
    */
   public update(
-    documentRef: MockDocumentReference,
+    documentRef: MockDocumentReference | DocumentReference,
     dataOrField: UpdateData | string | FieldPath,
     value?: any,
     ...moreFieldsAndValues: any[]
@@ -96,7 +96,7 @@ export class MockWriteBatch implements WriteBatch {
       return this as WriteBatch;
     }
     if (typeof dataOrField === 'object') {
-      this.transactionData[path] = documentRef.updateInTransaction(data, dataOrField, value, moreFieldsAndValues);
+      this.transactionData[path] = doc.updateInTransaction(data, dataOrField, value, moreFieldsAndValues);
       this.transactionOperation[path] = 'modified';
       return this as WriteBatch;
     }
@@ -113,7 +113,7 @@ export class MockWriteBatch implements WriteBatch {
     const path = documentRef.path;
     this.transactionData[path] = undefined;
     this.transactionOperation[path] = 'removed';
-    return this;
+    return this as WriteBatch;
   }
 
   /**

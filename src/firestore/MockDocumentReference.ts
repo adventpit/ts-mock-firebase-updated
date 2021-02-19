@@ -5,12 +5,12 @@ import {
   DocumentReference,
   DocumentSnapshot,
   FieldPath,
+  FirestoreDataConverter,
   FirestoreError,
   GetOptions,
   SetOptions,
   SnapshotListenOptions,
   UpdateData,
-  FirestoreDataConverter,
 } from '@firebase/firestore-types';
 
 import { MockFirebaseFirestore } from '@firebase/app-types';
@@ -352,8 +352,8 @@ export default class MockDocumentReference<T = DocumentData> implements Document
    */
   public onSnapshot = <T = DocumentData>(
     nextObservationOrOptions: SnapshotObserver<T> | SnapshotListenOptions | MockDocumentSnapshotCallback,
-    ObserverErrorOrNext?: SnapshotObserver<T> | ErrorFunction | MockDocumentSnapshotCallback,
-    completeOrError?: MockSubscriptionFunction | ErrorFunction,
+    ObserverErrorOrNext?: SnapshotObserver<T> | FirebaseErrorFunction | MockDocumentSnapshotCallback,
+    completeOrError?: MockSubscriptionFunction | FirebaseErrorFunction,
     onComplete?: MockSubscriptionFunction
   ): MockSubscriptionFunction => {
     if (typeof nextObservationOrOptions === 'function') {
@@ -372,7 +372,7 @@ export default class MockDocumentReference<T = DocumentData> implements Document
   }
 
   public withConverter = <U>(converter: FirestoreDataConverter<U>): DocumentReference<U> => {
-    throw new NotImplementedYet('withConverter')
+    throw new NotImplementedYet('withConverter');
   }
 
   public fireDocumentChangeEvent = (
@@ -485,6 +485,5 @@ export function extractArguments(data: UpdateData) {
 }
 
 export type MockSubscriptionFunction = () => void;
-export type ErrorFunction = (error: Error) => void;
 export type FirebaseErrorFunction = (error: FirestoreError) => void;
 export type MockDocumentSnapshotCallback = <T = any>(snapshot: MockDocumentSnapshot<T>) => void;

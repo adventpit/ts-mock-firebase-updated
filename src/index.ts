@@ -85,6 +85,8 @@ declare module '@firebase/app-types' {
      */
     public settings(settings: types.Settings): void;
 
+    public useEmulator(host: string, port: number): void;
+
     /**
      * Attempts to enable persistent storage, if possible.
      *
@@ -189,6 +191,11 @@ declare module '@firebase/app-types' {
 
     waitForPendingWrites(): Promise<void>;
     terminate(): Promise<void>;
+    loadBundle(
+      bundleData: ArrayBuffer | ReadableStream<Uint8Array> | string
+    ): types.LoadBundleTask;
+
+    namedQuery(name: string): Promise<MockQuery<types.DocumentData> | null>;
   }
   export interface MockFirebaseNamespace {
     app: {

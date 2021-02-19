@@ -6,17 +6,17 @@ import createFirebaseRulesIntepreter, {
 import { FirebaseRulesIntepreter } from 'firebase-rules-parser';
 import * as fs from 'fs';
 
+import { DocumentData, LoadBundleTask, PersistenceSettings, Settings } from '@firebase/firestore-types';
 import { hash } from '../utils/stringUtils';
 import { FirestoreMocker, GetDocumentIdCallback } from './FirestoreMocker';
 import { MockCollectionReference } from './MockCollectionReference';
 import MockDocumentReference, { MockDocumentSnapshotCallback } from './MockDocumentReference';
+import MockQuery from './MockQuery';
 import { MockTimestamp } from './MockTimestamp';
 import MockTransaction from './MockTransaction';
 import { MockWriteBatch } from './MockWritebatch';
 import { generateDocumentId, isValidCollectionReference, isValidDocumentReference, resolveReference } from './utils';
 import { NotImplementedYet } from './utils/NotImplementedYet';
-import MockQuery from './MockQuery';
-import { DocumentData, Settings, PersistenceSettings } from '@firebase/firestore-types';
 
 /**
  * Document object to define database data to be set into a mock
@@ -240,6 +240,10 @@ export class MockFirebaseFirestoreImpl implements MockFirebaseFirestore, MockFir
     this._settings = settings;
   }
 
+  public useEmulator = (host: string, port: number): void => {
+    throw new NotImplementedYet('MockFirebaseFirestore.useEmulator');
+  }
+
   /**
    * Attempts to enable persistent storage, if possible.
    *
@@ -276,7 +280,7 @@ export class MockFirebaseFirestoreImpl implements MockFirebaseFirestore, MockFir
   }
 
   public collectionGroup = (collectionId: string): MockQuery<DocumentData> => {
-    throw new NotImplementedYet("MockFirebaseFirestore.collectionGroup")
+    throw new NotImplementedYet("MockFirebaseFirestore.collectionGroup");
   }
 
 
@@ -356,12 +360,12 @@ export class MockFirebaseFirestoreImpl implements MockFirebaseFirestore, MockFir
   }
 
   public clearPersistence = (): Promise<void> => {
-    throw new NotImplementedYet("MockFirebaseFirestore.clearPersistence")
+    throw new NotImplementedYet("MockFirebaseFirestore.clearPersistence");
   }
 
 
   public waitForPendingWrites = (): Promise<void> => {
-    throw new NotImplementedYet("MockFirebaseFirestore.clearPersistence")
+    throw new NotImplementedYet("MockFirebaseFirestore.waitForPendingWrites");
   }
 
   public onSnapshotsInSync = (observerOrOnSync: {
@@ -369,11 +373,19 @@ export class MockFirebaseFirestoreImpl implements MockFirebaseFirestore, MockFir
     error?: (error: Error) => void;
     complete?: () => void;
   } | callbackFun): () => void => {
-    throw new NotImplementedYet("MockFirebaseFirestore.clearPersistence")
+    throw new NotImplementedYet("MockFirebaseFirestore.onSnapshotsInSync");
   }
 
   public terminate = (): Promise<void> => {
-    throw new NotImplementedYet("MockFirebaseFirestore.clearPersistence")
+    throw new NotImplementedYet("MockFirebaseFirestore.terminate");
+  }
+
+  loadBundle = (bundleData: ArrayBuffer | ReadableStream<Uint8Array> | string): LoadBundleTask => {
+    throw new NotImplementedYet("MockFirebaseFirestore.loadBundle");
+  }
+
+  namedQuery = (name: string): Promise<MockQuery<DocumentData> | null> => {
+    throw new NotImplementedYet("MockFirebaseFirestore.namedQuery");
   }
 }
 

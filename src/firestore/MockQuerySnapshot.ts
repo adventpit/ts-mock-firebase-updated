@@ -1,11 +1,11 @@
 import {
   DocumentChange,
+  DocumentData,
   Query,
   QueryDocumentSnapshot,
   QuerySnapshot,
   SnapshotListenOptions,
   SnapshotMetadata,
-  DocumentData,
 } from '@firebase/firestore-types';
 
 /**
